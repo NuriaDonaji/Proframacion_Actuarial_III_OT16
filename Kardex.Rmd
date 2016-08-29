@@ -1,0 +1,25 @@
+---
+title: "Kardex"
+author: "Nuria Donaji"
+date: "29 de agosto de 2016"
+output: html_document
+---Primer semestre
+Matemáticas básicas              10
+Problemas de Matemáticas básicas 10
+Programación Actuarial           10
+Introducción a la prof.           8
+DHPC                             10
+Conceptos de cálculo             10
+
+
+---Segundo Semestre
+Programación actuarial II         8
+Teoría del Interés                7
+Microeconomía                    10
+Cálculo diferencial               7
+Geometría Analítica              10
+Teoría de ecuaciones              9
+Lengua extranjera                10
+Lengua extranjera II             10
+Lengua extranjera III            10
+Lengua extranjera IV             10
