@@ -17,6 +17,8 @@ x <- c(0.5, 0.6)
 x
 class(x)
 
+
+
 x <- c(TRUE,FALSE)
 x
 class(x)
@@ -214,7 +216,7 @@ x[x>"b"]
 #De manera equivalente se puede obtener un vector lógico
 u <- x =="c"
 u #es de tipo lógico
-x[u] #me regresa solo los valores que cumlen la condicion
+x[u] #me regresa solo los valores que cumplen la condicion
 
 #Creamos una lista
 x<- list(foo = 1:4, bar =0.6)
@@ -224,10 +226,149 @@ x[1]
 #Extraemos nuevamente el primer elemento de la lista, ahora el elemnto es la secuencia en sí
 x[[1]]
 #extraemos un elemento por nombre
-x$bar # paraeso el $
+x$bar # para eso el $
 x[["bar"]]
 x["bar"]
-
+x$foo[2] #el segundo elemento del primer elemento de la lista
 x[2]
+#Clase 07/09/16_____________________________________________________________________________________
+#Creamos una lista de 3 elementos
+x<- list(foo = 1:4, bar =0.6, baz ="Hola")
+#Extraemos el primer y tercer elemento de la lista
+x[c(1, 3)] #elementos de la lista
+x[[c(1, 3)]] #toma el tercer elemento del primer objeto
+
+name <- "foo"
+x[[name]] #el doble [[]] me permite resolver el problema
+x$name #pero no puedo usar $
+x$foo 
+
+x <-  list(a = list(10,12,14), b= list(3.14,2.81))
+x[[c(1,3)]] #el tercer elemnto del primer objeto
+x[[1]][[3]] #selecciona el primer objeto y luego el tercer elemento con su propia naturaleza
+x[[c(2,1)]] #El primer elemento del segundo objeto
+
+#SUBCONJUNTOS DE UNA MATRIZ
+x <- matrix(1:6,2,3)
+x
+x[1,2] #coordenadas, el resultado es un vector
+x[2,1]
+x[1,] #elementos de la primera fila
+x[,2] #elementos de la segunda columna
 
 
+
+x[1,2] #el resultado es un vector
+#con drop = false, se mantienen la dimension y el resultado será una matriz
+x[1,2,drop= FALSE]
+
+#si dejamos solamente el espacio, el resultado será un vector
+x[1,]
+#si usamos drop =False, el resultado será una matriz
+x[1, ,drop =FALSE]
+
+
+x <- list(aardvark = 1:5)
+x$a #encuentra una coincidencia porque el nombre empieza con a 
+x[["a"]] #no encuentra nada porque es una busqueda exacta
+x[["a",exact=FALSE]] #ahora sí, porque le pedimos que no sea exacto
+  #Ejemplo
+airquality$O
+airquality[["O"]]
+airquality[["O",exact=FALSE]]
+
+#VALORES FALTANTES
+airquality[1:6,] #el resultado es un data.frame, extrae las primeras 6 filas
+completos <- complete.cases(airquality)
+completos #es un vector, son 153 elementos que representan el numero de filas de airquality
+airquality[completos,]#solo filas completas
+airquality[completos,][1:6,] #las primeras 6 filas completas
+
+airquality[1:6,][completos,]# completos tiene 153 filas y l no encontrar valor hay puro NA
+
+#OPERACIONES VECTORIZADAS
+x <- 1:4; y<- 6:9
+x+y #suma los elementos correspondientes 
+# si y = 6:8, sumaría el 4 con el 6 pues repite los valores
+x>2
+x>=2
+y==8 #cuando y = 8
+x*y #elementos correspondientes 
+x/y #elementos correspondientes 
+
+x <- matrix(1:4,2,2)#byrow= false entonces me lo pone por columnas
+y<- matrix(rep(10,4),2,2) #rep me repite un valo cierto umero de veces
+x*y
+x/y
+x %*% y #multiplicacion de matrices, (mxn)*(nxp)= (mxp)
+
+#Clase 08/09/16______________________________________________________________________________________
+#ESTRUCTURAS DE CONTROL
+
+
+#if,else/ for/ while/repeat/break/next/return
+
+x<- c("a","b","c","d")
+for(i in 1:4){print(x[i])}
+
+for(i in seq_along(x)){print(x[i])}
+
+for(letra in x){print(letra)}
+for(i in 1:4)print(x[i])
+
+#ejercicio
+z <- matrix(1:6,2,3,T)
+for(i in seq_len(nrow(x)))
+  {for(j in seq_len(ncol(x))){print(z[i,j])}}
+
+#CLASE 12/09/16________________________________________________________________________________
+z <- 5
+while(z>=3 && z<=10)
+  {print(z)
+  moneda <- rbinom(1,1,0.5)
+  if (moneda==1){#Caminata Aleatoria
+    z<- z+1
+  }else{
+    z <- z-1
+  }
+}
+#las condiciones se evaluan de izq a der
+#rbinom es variable aleatoria binomial
+
+#Ejercicio hacer un vector que guarde el valor de z
+
+z <- 5
+caminata <- vector("numeric")
+
+while(z>=3 && z<=10){
+  print(z)
+  caminata <- c(caminata,z)
+  moneda <- rbinom(1,1,0.5)
+  if (moneda==1){#Caminata Aleatoria
+    z<- z+1
+  }else{
+    z <- z-1
+  }
+}
+ #plot(caminata, type = "l")
+caminata
+
+#practica de contador (que tanto se sale por abajo o por arriba)
+arriba <- 0
+abajo <- 0
+
+for (i in 1:100){
+  z <- 5
+  while(z>=3 && z<=10){
+    
+    moneda <- rbinom(1,1,0.5)
+    if (moneda==1){#Caminata Aleatoria
+      z<- z+1
+    }else{
+      z <- z-1
+    }
+  }
+  if (z<10) {abajo <- (abajo + 1)} else{arriba <- (arriba +1)}
+}
+arriba
+abajo
