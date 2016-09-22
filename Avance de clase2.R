@@ -372,3 +372,79 @@ for (i in 1:100){
 }
 arriba
 abajo
+
+
+#CLASE 19/09/2016_____________________________________________________________________________________________
+#repeat 
+x0 <-1
+tol <- 1e-8
+repeat{
+  x1<-CalculaEstimado(x0)
+  if(abs(x1-x0)<tol){
+    break
+  }else{
+    x0<-x1
+  }
+  
+#next para no hacer una iteracion en un ciclo
+  for (i in 1:100){
+    if (i<=  20){
+      next
+    }
+  }
+  
+#creaciones de funciones
+  suma2 <- function(x,y){
+    x+y
+  } #la tengo que correr primero para que aparezca en mi enterno
+  
+mayor10 <- function(x){
+  x[x>10]
+}  
+  
+#ejemplos
+mayor10(runif(100,5,15))
+mayor10(1:100)
+
+
+mayorque <-function(x,n){
+  x[x>n]
+}
+
+mayorque(1:10,3)
+
+promedioCol <-function(x,quitar.NA = TRUE){
+  nc <- ncol(x)
+  medias<- vector("numeric",nc)
+  for (i in 1:nc){
+    medias[i] <- mean(x[,i], na.rm = quitar.NA) #mean saca media y na.rm quitaa los valores NA del promedio
+  }
+}
+promedioCol(as.matrix(1:10))
+
+#Evaluacion perezosa
+f<- function(a,b){
+  a^2
+}
+f(2,1)
+f<- function(a,b){
+  print(a)
+  print(b)
+}
+f(2) #marca error pues no hay b
+
+#el argumento "..." Para pasar de una funciona otra
+myplot <- function(x,y,type="l",...){
+  plot(x,y,type=type,...)
+}
+args(paste)
+ #cada que pegue una cadena debera de dejar una separcion de un espacio
+
+args(cat)
+ #cada que pegue una cadena no habrá separcion
+  
+paste("a","b",sep=":")
+paste("a","b",se=":")
+
+if
+complete.cases()
