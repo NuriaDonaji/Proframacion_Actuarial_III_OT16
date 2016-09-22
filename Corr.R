@@ -19,3 +19,4 @@ corr <- function(directorio,horizonte)
   } 
 
 corr("specdata",0)
+ 
